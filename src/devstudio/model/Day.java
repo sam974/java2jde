@@ -19,19 +19,6 @@ public class Day {
 
 	public final static Day WEEKEND = new Day();
 	public final static Day CONGE = new Day(Activity.CONGE);
-	public final static Day FERIE = new Day(Activity.FERIE);
-
-	public static Day atlantisDay() {
-		Day out = new Day(Activity.ATLANTIS_DEV);
-		out.addSubActivity(Activity.ATLANTIS_MISC, DAILY_MEETING);
-		return out;
-	}
-
-	public static Day bacchusDay() {
-		Day out = new Day(Activity.BACCHUS_DEV);
-		out.addSubActivity(Activity.BACCHUS_MISC, DAILY_MEETING);
-		return out;
-	}
 
 	/**
 	 * Attributes
@@ -57,6 +44,11 @@ public class Day {
 			activities.put(activity, load + workLoad);
 		}
 		getFixedLoad();
+		return this;
+	}
+
+	public Day removeSubActivity(Activity activity) {
+		activities.remove(activity);
 		return this;
 	}
 
