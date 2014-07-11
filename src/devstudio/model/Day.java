@@ -6,19 +6,7 @@ import java.util.TreeMap;
 
 public class Day {
 
-	public final static Double HALF_HOUR = 0.5;
-	public final static Double ONE_HOUR = 1.;
-	public final static Double TWO_HOURS = 2 * ONE_HOUR;
-	public final static Double FOUR_HOUR = 4 * ONE_HOUR;
-	public final static Double HALF_DAY = FOUR_HOUR;
-	public final static Double FULL_DAY = 8 * ONE_HOUR;
-
-	public final static Double GREEDY = Double.MAX_VALUE;
-	public final static Double NOTHING = 0.;
-	public final static Double DAILY_MEETING = HALF_HOUR;
-
 	public final static Day WEEKEND = new Day();
-	public final static Day CONGE = new Day(Activity.CONGE);
 
 	/**
 	 * Attributes
@@ -34,13 +22,13 @@ public class Day {
 	}
 
 	public Day addSubActivity(Activity activity, Double workLoad) {
-		assert workLoad != GREEDY;
-		assert workLoad >= NOTHING;
+		assert workLoad != Constants.GREEDY;
+		assert workLoad >= Constants.NOTHING;
 		Double load = activities.get(activity);
 		if (load == null) {
 			activities.put(activity, workLoad);
 		} else {
-			assert load + workLoad <= FULL_DAY;
+			assert load + workLoad <= Constants.FULL_DAY;
 			activities.put(activity, load + workLoad);
 		}
 		getFixedLoad();
@@ -52,19 +40,32 @@ public class Day {
 		return this;
 	}
 
+	public Day removeSubActivity(Activity activity, Double workLoad) {
+		Double load = activities.get(activity);
+		if (load != null) {
+			if (workLoad >= load) {
+				activities.remove(activity);
+			} else {
+				assert load - workLoad >= 0;
+				activities.put(activity, load - workLoad);
+			}
+		}
+		return this;
+	}
+
 	public Double getFixedLoad() {
-		Double out = NOTHING;
+		Double out = Constants.NOTHING;
 		for (Entry<Activity, Double> e : activities.entrySet()) {
 			out += e.getValue();
 		}
-		assert out <= FULL_DAY;
+		assert out <= Constants.FULL_DAY;
 		return out;
 	}
 
 	public Double getWork(Activity activity) {
-		Double out = NOTHING;
+		Double out = Constants.NOTHING;
 		if (activity == greedyActivity) {
-			out = FULL_DAY - getFixedLoad();
+			out = Constants.FULL_DAY - getFixedLoad();
 		} else if (activities.containsKey(activity)) {
 			out = activities.get(activity);
 		}

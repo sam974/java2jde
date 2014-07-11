@@ -1,4 +1,5 @@
 package devstudio.model;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,18 +13,22 @@ public class Config extends Properties {
 
 	static {
 		INSTANCE = new Config();
-		try {
-			INSTANCE.load(new FileInputStream(new File("resources/config.properties")));
+		try (FileInputStream in = new FileInputStream(new File("resources/config.properties"))) {
+			INSTANCE.load(in);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public String getProject(String id) {
-		return getProperty("project." + id, "");
+		String out = getProperty("project." + id, "");
+		assert out != null;
+		return out;
 	}
 
 	public String getTask(String id) {
-		return getProperty("task." + id, "");
+		String out = getProperty("task." + id, "");
+		assert out != null;
+		return out;
 	}
 }

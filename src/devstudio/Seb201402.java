@@ -9,38 +9,34 @@ import devstudio.model.Csv;
 import devstudio.model.MonthlyReport;
 import devstudio.model.Seb;
 
-public class SampleReport {
+public class Seb201402 {
 	public static void main(String[] args) throws FileNotFoundException {
-		MonthlyReport report = new MonthlyReport(2014, Calendar.JANUARY);
+		MonthlyReport report = new MonthlyReport(2014, Calendar.FEBRUARY);
 		Seb seb = new Seb(Constants.ATLANTIS);
 
-		report.newDay(seb.publicHolyday());
-		report.newDay(seb.dayOff());
-		report.newDay(seb.dayOff());
+		report.newDay(seb.dev());
+		report.newDay(seb.dev());
+		report.newDay(seb.meeting1h(seb.dev()));
+		report.newDay(seb.dev());
+		report.newDay(seb.dev());
 
 		report.newDay(seb.dev());
-		report.newDay(seb.noDaily(seb.dev()));
+		report.newDay(seb.dev());
+		report.newDay(seb.dev());
+		report.newDay(seb.dev());
+		report.newDay(seb.dev());
+
+		report.newDay(seb.dev());
 		report.newDay(seb.test());
-		report.newDay(seb.noDaily(seb.test()));
-		report.newDay(seb.setProjectName(Constants.BACCHUS).dev());
+		report.newDay(seb.dayOff());
+		report.newDay(seb.test());
+		report.newDay(seb.dev()).addSubActivity(Activity.LEGACY, Constants.TWO_HOURS);
 
+		report.newDay(seb.setProjectName(Constants.BACCHUS).dev()).addSubActivity(Activity.ATLANTIS_DAILY, Constants.TWO_HOURS);
 		report.newDay(seb.halfDayOff(seb.dev()));
-		report.newDay(seb.halfDayOff(seb.noDaily(seb.dev())));
-		report.newDay(seb.halfDayOff(seb.noDaily(seb.test())));
+		report.newDay(seb.meeting(seb.dev(), Constants.TWO_HOURS));
 		report.newDay(seb.dev());
-		report.newDay(seb.dev());
-
-		report.newDay(seb.dev()).addSubActivity(Activity.LEGACY, Constants.ONE_HOUR);
-		report.newDay(seb.dev()).addSubActivity(Activity.OTHER, Constants.TWO_HOURS);
-		report.newDay(seb.dev());
-		report.newDay(seb.dev());
-		report.newDay(seb.dev());
-
-		report.newDay(seb.dev());
-		report.newDay(seb.dev());
-		report.newDay(seb.dev());
-		report.newDay(seb.dev());
-		report.newDay(seb.dev());
+		report.newDay(seb.halfDayOff(seb.dev()));
 
 		Csv.writeReport(report);
 	}

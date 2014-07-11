@@ -64,7 +64,7 @@ public class Csv extends PrintWriter {
 		boolean hasLoad = false;
 		for (Day day : days) {
 			Double load = day.getWork(activity);
-			hasLoad |= load != Day.NOTHING;
+			hasLoad |= load != Constants.NOTHING;
 			String string = DECIMAL_FORMAT.format(load);
 			items.add(item2string(string));
 		}
@@ -73,5 +73,16 @@ public class Csv extends PrintWriter {
 
 	private String item2string(String item) {
 		return StringUtils.rightPad(DQ + item + DQ, padItems ? 6 : 0);
+	}
+
+	public static void writeReport(MonthlyReport report) throws FileNotFoundException {
+		Csv writer;
+		Csv.setPadItems(true);
+		writer = new Csv(new File("output/" + report.getIdentifier() + "a.csv"));
+		writer.writeTimesheet(report.getFirstReport());
+		writer.close();
+		writer = new Csv(new File("output/" + report.getIdentifier() + "b.csv"));
+		writer.writeTimesheet(report.getSecondReport());
+		writer.close();
 	}
 }

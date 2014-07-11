@@ -9,30 +9,25 @@ import devstudio.model.Csv;
 import devstudio.model.MonthlyReport;
 import devstudio.model.Seb;
 
-public class SampleReport {
+public class Seb201404 {
 	public static void main(String[] args) throws FileNotFoundException {
-		MonthlyReport report = new MonthlyReport(2014, Calendar.JANUARY);
-		Seb seb = new Seb(Constants.ATLANTIS);
+		MonthlyReport report = new MonthlyReport(2014, Calendar.APRIL);
+		Seb seb = new Seb(Constants.BACCHUS);
 
-		report.newDay(seb.publicHolyday());
+		report.newDay(seb.dev());
+		report.newDay(seb.dev());
+		report.newDay(seb.dev());
 		report.newDay(seb.dayOff());
-		report.newDay(seb.dayOff());
 
 		report.newDay(seb.dev());
-		report.newDay(seb.noDaily(seb.dev()));
-		report.newDay(seb.test());
-		report.newDay(seb.noDaily(seb.test()));
-		report.newDay(seb.setProjectName(Constants.BACCHUS).dev());
-
-		report.newDay(seb.halfDayOff(seb.dev()));
-		report.newDay(seb.halfDayOff(seb.noDaily(seb.dev())));
-		report.newDay(seb.halfDayOff(seb.noDaily(seb.test())));
 		report.newDay(seb.dev());
+		report.newDay(seb.dev()).addSubActivity(Activity.LEGACY, Constants.TWO_HOURS);
 		report.newDay(seb.dev());
-
 		report.newDay(seb.dev()).addSubActivity(Activity.LEGACY, Constants.ONE_HOUR);
-		report.newDay(seb.dev()).addSubActivity(Activity.OTHER, Constants.TWO_HOURS);
+
 		report.newDay(seb.dev());
+		report.newDay(seb.dev());
+		report.newDay(seb.meeting1h(seb.dev())).addSubActivity(Activity.BACCHUS_DAILY, Constants.TWO_HOURS);
 		report.newDay(seb.dev());
 		report.newDay(seb.dev());
 
@@ -41,6 +36,10 @@ public class SampleReport {
 		report.newDay(seb.dev());
 		report.newDay(seb.dev());
 		report.newDay(seb.dev());
+
+		report.newDay(seb.dev());
+		report.newDay(seb.dev());
+		report.newDay(seb.meeting1h(seb.dev()));
 
 		Csv.writeReport(report);
 	}
