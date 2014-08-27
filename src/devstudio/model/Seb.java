@@ -38,7 +38,7 @@ public class Seb {
 		return out;
 	}
 
-	public Day publicHolyday() {
+	public Day publicHoliday() {
 		Day out = new Day(Activity.PUBLICHOLYDAY);
 		return out;
 	}

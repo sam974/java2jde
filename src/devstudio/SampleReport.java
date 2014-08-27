@@ -14,7 +14,7 @@ public class SampleReport {
 		MonthlyReport report = new MonthlyReport(2014, Calendar.JANUARY);
 		Seb seb = new Seb(Constants.ATLANTIS);
 
-		report.newDay(seb.publicHolyday());
+		report.newDay(seb.publicHoliday());
 		report.newDay(seb.dayOff());
 		report.newDay(seb.dayOff());
 
