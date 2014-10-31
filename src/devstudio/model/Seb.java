@@ -8,25 +8,41 @@ public class Seb {
 		this.projectName = projectName;
 	}
 
+	public String getProjectName() {
+		return projectName;
+	}
+
 	public Seb setProjectName(String projectName) {
 		this.projectName = projectName;
 		return this;
 	}
 
+	public Activity getActivityTest() {
+		return Activity.getTest(projectName);
+	}
+
+	public Activity getActivityDaily() {
+		return Activity.getDaily(projectName);
+	}
+
+	public Activity getActivityDevel() {
+		return Activity.getDevel(projectName);
+	}
+
 	public Day test() {
-		return daily(new Day(Activity.getTest(projectName)));
+		return daily(new Day(getActivityTest()));
 	}
 
 	public Day dev() {
-		return daily(new Day(Activity.getDevel(projectName)));
+		return daily(new Day(getActivityDevel()));
 	}
 
 	public Day daily(Day in) {
-		return in.addSubActivity(Activity.getDaily(projectName), Constants.DAILY_MEETING);
+		return in.addSubActivity(getActivityDaily(), Constants.DAILY_MEETING);
 	}
 
 	public Day noDaily(Day in) {
-		return in.removeSubActivity(Activity.getDaily(projectName), Constants.DAILY_MEETING);
+		return in.removeSubActivity(getActivityDaily(), Constants.DAILY_MEETING);
 	}
 
 	public Day halfDayOff(Day in) {
