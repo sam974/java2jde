@@ -30,7 +30,7 @@ public class Seb201402 {
 		report.newDay(seb.test());
 		report.newDay(seb.dayOff());
 		report.newDay(seb.test());
-		report.newDay(seb.dev()).addSubActivity(Activity.LEGACY, Constants.TWO_HOURS);
+		report.newDay(seb.dev()).addSubActivity(Activity.SUPPORT_LEGACY, Constants.TWO_HOURS);
 
 		report.newDay(seb.setProjectName(Constants.BACCHUS).dev()).addSubActivity(Activity.ATLANTIS_DAILY, Constants.TWO_HOURS);
 		report.newDay(seb.halfDayOff(seb.dev()));

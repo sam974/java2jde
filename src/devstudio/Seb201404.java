@@ -21,9 +21,9 @@ public class Seb201404 {
 
 		report.newDay(seb.dev());
 		report.newDay(seb.dev());
-		report.newDay(seb.dev()).addSubActivity(Activity.LEGACY, Constants.TWO_HOURS);
+		report.newDay(seb.dev()).addSubActivity(Activity.SUPPORT_LEGACY, Constants.TWO_HOURS);
 		report.newDay(seb.dev());
-		report.newDay(seb.dev()).addSubActivity(Activity.LEGACY, Constants.ONE_HOUR);
+		report.newDay(seb.dev()).addSubActivity(Activity.SUPPORT_LEGACY, Constants.ONE_HOUR);
 
 		report.newDay(seb.dev());
 		report.newDay(seb.dev());

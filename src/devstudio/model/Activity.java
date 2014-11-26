@@ -16,7 +16,11 @@ public enum Activity {
 	BAUCIS_TEST(Constants.BAUCIS, Constants.TEST),
 	BAUCIS_DAILY(Constants.BAUCIS, Constants.DAILY),
 
-	LEGACY("legacy", "other"),
+	BRONTES_DEV(Constants.BRONTES, Constants.DEVEL),
+	BRONTES_TEST(Constants.BRONTES, Constants.TEST),
+	BRONTES_DAILY(Constants.BRONTES, Constants.DAILY),
+
+	SUPPORT_LEGACY("legacy", "other"),
 	OTHER("misc", "other"),
 
 	DAYOFF("absence", "conge"),

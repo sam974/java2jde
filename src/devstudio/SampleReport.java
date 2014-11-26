@@ -30,7 +30,7 @@ public class SampleReport {
 		report.newDay(seb.dev());
 		report.newDay(seb.dev());
 
-		report.newDay(seb.dev()).addSubActivity(Activity.LEGACY, Constants.ONE_HOUR);
+		report.newDay(seb.dev()).addSubActivity(Activity.SUPPORT_LEGACY, Constants.ONE_HOUR);
 		report.newDay(seb.dev()).addSubActivity(Activity.OTHER, Constants.TWO_HOURS);
 		report.newDay(seb.dev());
 		report.newDay(seb.dev());
