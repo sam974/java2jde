@@ -5,6 +5,7 @@ public interface Constants {
 	public final static String BACCHUS = "bacchus";
 	public final static String BAUCIS = "baucis";
 	public static final String BRONTES = "brontes";
+	public static final String CALYPSO = "calypso";
 
 	public final static String DEVEL = "dev";
 	public final static String DAILY = "misc";

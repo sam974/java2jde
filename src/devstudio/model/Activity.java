@@ -16,6 +16,10 @@ public enum Activity {
 	BAUCIS_TEST(Constants.BAUCIS, Constants.TEST),
 	BAUCIS_DAILY(Constants.BAUCIS, Constants.DAILY),
 
+	CALYPSO_DEV(Constants.CALYPSO, Constants.DEVEL),
+	CALYPSO_TEST(Constants.CALYPSO, Constants.TEST),
+	CALYPSO_DAILY(Constants.CALYPSO, Constants.DAILY),
+
 	BRONTES_DEV(Constants.BRONTES, Constants.DEVEL),
 	BRONTES_TEST(Constants.BRONTES, Constants.TEST),
 	BRONTES_DAILY(Constants.BRONTES, Constants.DAILY),
