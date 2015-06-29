@@ -11,7 +11,7 @@ import devstudio.model.Seb;
 public class Seb201503 {
 	public static void main(String[] args) throws FileNotFoundException {
 		MonthlyReport report = new MonthlyReport(2015, Calendar.FEBRUARY);
-		Seb seb = new Seb(Constants.CALYPSO);
+		Seb seb = new Seb(Constants.PROJECT_CALYPSO);
 
 		report.newDay(seb.dayOff());
 		report.newDay(seb.dev());

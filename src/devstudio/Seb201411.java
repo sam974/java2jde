@@ -12,7 +12,7 @@ import devstudio.model.Seb;
 public class Seb201411 {
 	public static void main(String[] args) throws FileNotFoundException {
 		MonthlyReport report = new MonthlyReport(2014, Calendar.NOVEMBER);
-		Seb seb = new Seb(Constants.BRONTES);
+		Seb seb = new Seb(Constants.PROJECT_BRONTES);
 
 		report.newDay(seb.dayOff());
 		report.newDay(seb.dayOff());

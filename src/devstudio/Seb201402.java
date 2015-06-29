@@ -12,7 +12,7 @@ import devstudio.model.Seb;
 public class Seb201402 {
 	public static void main(String[] args) throws FileNotFoundException {
 		MonthlyReport report = new MonthlyReport(2014, Calendar.FEBRUARY);
-		Seb seb = new Seb(Constants.ATLANTIS);
+		Seb seb = new Seb(Constants.PROJECT_ATLANTIS);
 
 		report.newDay(seb.dev());
 		report.newDay(seb.dev());
@@ -32,7 +32,7 @@ public class Seb201402 {
 		report.newDay(seb.test());
 		report.newDay(seb.dev()).addSubActivity(Activity.SUPPORT_LEGACY, Constants.TWO_HOURS);
 
-		report.newDay(seb.setProjectName(Constants.BACCHUS).dev()).addSubActivity(Activity.ATLANTIS_DAILY, Constants.TWO_HOURS);
+		report.newDay(seb.setProjectName(Constants.PROJECT_BACCHUS).dev()).addSubActivity(Activity.ATLANTIS_DAILY, Constants.TWO_HOURS);
 		report.newDay(seb.halfDayOff(seb.dev()));
 		report.newDay(seb.meeting(seb.dev(), Constants.TWO_HOURS));
 		report.newDay(seb.dev());

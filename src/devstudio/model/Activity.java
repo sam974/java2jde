@@ -4,38 +4,44 @@ import org.apache.commons.lang3.StringUtils;
 
 public enum Activity {
 
-	ATLANTIS_DEV(Constants.ATLANTIS, Constants.DEVEL),
-	ATLANTIS_TEST(Constants.ATLANTIS, Constants.TEST),
-	ATLANTIS_DAILY(Constants.ATLANTIS, Constants.DAILY),
+	ATLANTIS_DEV(Constants.PROJECT_ATLANTIS, Constants.TASK_DEVEL),
+	ATLANTIS_TEST(Constants.PROJECT_ATLANTIS, Constants.TASK_TEST),
+	ATLANTIS_DAILY(Constants.PROJECT_ATLANTIS, Constants.TASK_MISC),
 
-	BACCHUS_DEV(Constants.BACCHUS, Constants.DEVEL),
-	BACCHUS_TEST(Constants.BACCHUS, Constants.TEST),
-	BACCHUS_DAILY(Constants.BACCHUS, Constants.DAILY),
+	BACCHUS_DEV(Constants.PROJECT_BACCHUS, Constants.TASK_DEVEL),
+	BACCHUS_TEST(Constants.PROJECT_BACCHUS, Constants.TASK_TEST),
+	BACCHUS_DAILY(Constants.PROJECT_BACCHUS, Constants.TASK_MISC),
 
-	BAUCIS_DEV(Constants.BAUCIS, Constants.DEVEL),
-	BAUCIS_TEST(Constants.BAUCIS, Constants.TEST),
-	BAUCIS_DAILY(Constants.BAUCIS, Constants.DAILY),
+	BAUCIS_DEV(Constants.PROJECT_BAUCIS, Constants.TASK_DEVEL),
+	BAUCIS_TEST(Constants.PROJECT_BAUCIS, Constants.TASK_TEST),
+	BAUCIS_DAILY(Constants.PROJECT_BAUCIS, Constants.TASK_MISC),
 
-	CALYPSO_DEV(Constants.CALYPSO, Constants.DEVEL),
-	CALYPSO_TEST(Constants.CALYPSO, Constants.TEST),
-	CALYPSO_DAILY(Constants.CALYPSO, Constants.DAILY),
+	BRONTES_DEV(Constants.PROJECT_BRONTES, Constants.TASK_DEVEL),
+	BRONTES_TEST(Constants.PROJECT_BRONTES, Constants.TASK_TEST),
+	BRONTES_DAILY(Constants.PROJECT_BRONTES, Constants.TASK_MISC),
 
-	BRONTES_DEV(Constants.BRONTES, Constants.DEVEL),
-	BRONTES_TEST(Constants.BRONTES, Constants.TEST),
-	BRONTES_DAILY(Constants.BRONTES, Constants.DAILY),
+	CALYPSO_DEV(Constants.PROJECT_CALYPSO, Constants.TASK_DEVEL),
+	CALYPSO_TEST(Constants.PROJECT_CALYPSO, Constants.TASK_TEST),
+	CALYPSO_DAILY(Constants.PROJECT_CALYPSO, Constants.TASK_MISC),
 
-	SUPPORT_LEGACY("legacy", "other"),
-	OTHER("misc", "other"),
+	CASSANDRA_DEV(Constants.PROJECT_CASSANDRA, Constants.TASK_DEVEL),
+	CASSANDRA_TEST(Constants.PROJECT_CASSANDRA, Constants.TASK_TEST),
+	CASSANDRA_DAILY(Constants.PROJECT_CASSANDRA, Constants.TASK_MISC),
 
-	DAYOFF("absence", "conge"),
-	PUBLICHOLYDAY("absence", "ferie");
+	SUPPORT_LEGACY(Constants.PROJECT_LEGACY, Constants.TASK_OTHER),
+	OTHER(Constants.PROJECT_MISC, Constants.TASK_OTHER),
+
+	DAYOFF(Constants.PROJECT_ABSENCE, Constants.TASK_CONGE),
+	PUBLICHOLYDAY(Constants.PROJECT_ABSENCE, Constants.TASK_FERIE);
 
 	private String project;
 	private String task;
 
 	Activity(String projectId, String taskId) {
-		this.project = projectId == null ? "" : Config.INSTANCE.getProject(projectId);
-		this.task = taskId == null ? "" : Config.INSTANCE.getTask(taskId);
+		assert StringUtils.isNotBlank(projectId);
+		assert StringUtils.isNotBlank(taskId);
+		this.project = projectId;
+		this.task = taskId;
 	}
 
 	public String getProject() {
@@ -56,8 +62,7 @@ public enum Activity {
 
 	private static Activity retrieve(String projectName, String task) {
 		for (Activity activity : values()) {
-			if (StringUtils.equals(Config.INSTANCE.getProject(projectName), activity.project)
-					&& StringUtils.equals(activity.task, Config.INSTANCE.getTask(task))) {
+			if (StringUtils.equals(activity.project, projectName) && StringUtils.equals(activity.task, task)) {
 				return activity;
 			}
 		}
@@ -65,14 +70,14 @@ public enum Activity {
 	}
 
 	public static Activity getDevel(String projectName) {
-		return retrieve(projectName, Constants.DEVEL);
+		return retrieve(projectName, Constants.TASK_DEVEL);
 	}
 
 	public static Activity getDaily(String projectName) {
-		return retrieve(projectName, Constants.DAILY);
+		return retrieve(projectName, Constants.TASK_MISC);
 	}
 
 	public static Activity getTest(String projectName) {
-		return retrieve(projectName, Constants.TEST);
+		return retrieve(projectName, Constants.TASK_TEST);
 	}
 }

@@ -11,7 +11,7 @@ import devstudio.model.Seb;
 public class Seb201406 {
 	public static void main(String[] args) throws FileNotFoundException {
 		MonthlyReport report = new MonthlyReport(2014, Calendar.JUNE);
-		Seb seb = new Seb(Constants.BACCHUS);
+		Seb seb = new Seb(Constants.PROJECT_BACCHUS);
 
 		report.newDay(seb.dayOff());
 		report.newDay(seb.dev());

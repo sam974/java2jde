@@ -12,7 +12,7 @@ import devstudio.model.Seb;
 public class Seb201410 {
 	public static void main(String[] args) throws FileNotFoundException {
 		MonthlyReport report = new MonthlyReport(2014, Calendar.OCTOBER);
-		Seb seb = new Seb(Constants.BAUCIS);
+		Seb seb = new Seb(Constants.PROJECT_BAUCIS);
 
 		report.newDay(seb.meeting1h(seb.dev())).addSubActivity(Activity.OTHER, Constants.TWO_HOURS); // Compte désactivé
 		report.newDay(seb.dev());
