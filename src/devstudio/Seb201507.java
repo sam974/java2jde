@@ -23,15 +23,9 @@ public class Seb201507 {
 		report.newDay(seb.dev());
 		report.newDay(seb.dev());
 
-		report.newDay(seb.dev());
+		report.newDay(seb.dayOff());
 		report.newDay(seb.publicHoliday());
-		report.newDay(seb.dev());
-		report.newDay(seb.dev());
-		report.newDay(seb.dev());
-
-		report.newDay(seb.dev());
-		report.newDay(seb.dev());
-		report.newDay(seb.dev());
+		report.newDay(seb.dayOff());
 		report.newDay(seb.dev());
 		report.newDay(seb.dev());
 
@@ -40,6 +34,12 @@ public class Seb201507 {
 		report.newDay(seb.dev());
 		report.newDay(seb.dev());
 		report.newDay(seb.dev());
+
+		report.newDay(seb.dev());
+		report.newDay(seb.dev());
+		report.newDay(seb.test());
+		report.newDay(seb.test());
+		report.newDay(seb.test());
 
 		Csv.writeReport(report);
 	}
