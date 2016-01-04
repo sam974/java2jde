@@ -9,6 +9,7 @@ public interface Constants {
 	public static final String PROJECT_CALYPSO = "AP15012";
 	public static final String PROJECT_CASSANDRA = "AP15021";
 	public static final String PROJECT_CONCERTO = "AP15024";
+	public static final String PROJECT_CORNAMUSE = "AP15032";
 	public static final String PROJECT_LEGACY = "AP10027";
 	public static final String PROJECT_MISC = "AP10018";
 	public static final String PROJECT_FORMATION = "AP10049";

@@ -27,7 +27,7 @@ public class Seb201404 {
 
 		report.newDay(seb.dev());
 		report.newDay(seb.dev());
-		report.newDay(seb.meeting1h(seb.dev())).addSubActivity(Activity.BACCHUS_DAILY, Constants.TWO_HOURS);
+		report.newDay(seb.meeting1h(seb.dev())).addSubActivity(seb.getActivityDaily(), Constants.TWO_HOURS);
 		report.newDay(seb.dev());
 		report.newDay(seb.dev());
 

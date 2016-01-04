@@ -3,7 +3,6 @@ package devstudio;
 import java.io.FileNotFoundException;
 import java.util.Calendar;
 
-import devstudio.model.Activity;
 import devstudio.model.Constants;
 import devstudio.model.Csv;
 import devstudio.model.MonthlyReport;
@@ -36,7 +35,7 @@ public class Seb201403 {
 		report.newDay(seb.dev());
 		report.newDay(seb.dev());
 		report.newDay(seb.dev());
-		report.newDay(seb.dev()).addSubActivity(Activity.BACCHUS_DAILY, Constants.TWO_HOURS);
+		report.newDay(seb.dev()).addSubActivity(seb.getActivityDaily(), Constants.TWO_HOURS);
 
 		report.newDay(seb.dev());
 
