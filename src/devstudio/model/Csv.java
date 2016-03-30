@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 public class Csv extends PrintWriter {
 
 	private final static DecimalFormat DECIMAL_FORMAT = new DecimalFormat();
+
 	static {
 		DecimalFormatSymbols custom = new DecimalFormatSymbols();
 		custom.setDecimalSeparator('.');
@@ -76,13 +77,12 @@ public class Csv extends PrintWriter {
 	}
 
 	public static void writeReport(MonthlyReport report) throws FileNotFoundException {
-		Csv writer;
 		Csv.setPadItems(true);
-		writer = new Csv(new File("output/" + report.getIdentifier() + "a.csv"));
-		writer.writeTimesheet(report.getFirstReport());
-		writer.close();
-		writer = new Csv(new File("output/" + report.getIdentifier() + "b.csv"));
-		writer.writeTimesheet(report.getSecondReport());
-		writer.close();
+		try (Csv writer = new Csv(new File("output/" + report.getIdentifier() + "a.csv"))) {
+			writer.writeTimesheet(report.getFirstReport());
+		}
+		try (Csv writer = new Csv(new File("output/" + report.getIdentifier() + "b.csv"))) {
+			writer.writeTimesheet(report.getSecondReport());
+		}
 	}
 }
