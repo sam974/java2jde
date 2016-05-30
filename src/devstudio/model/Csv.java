@@ -42,13 +42,13 @@ public class Csv extends PrintWriter {
 	}
 
 	public void writeTimesheet(List<Day> days) {
-		for (Activity activity : Activity.values()) {
-			String line = getActivityLine(activity, days);
+		days.stream().flatMap(d -> d.getActivities().stream()).distinct().sorted().forEach(a -> {
+			String line = getActivityLine(a, days);
 			if (line != null) {
 				println(line);
 				System.out.println(line);
 			}
-		}
+		});
 	}
 
 	@Override
@@ -62,14 +62,15 @@ public class Csv extends PrintWriter {
 		items.add(item2string("0"));
 		items.add(item2string(activity.getProject()));
 		items.add(item2string(activity.getTask()));
-		boolean hasLoad = false;
+		double totalLoad = 0;
 		for (Day day : days) {
 			Double load = day.getWork(activity);
-			hasLoad |= load != Constants.NOTHING;
+			totalLoad += load;
 			String string = DECIMAL_FORMAT.format(load);
 			items.add(item2string(string));
 		}
-		return hasLoad ? StringUtils.join(items, COMA) : null;
+		assert totalLoad == Constants.WORKLOAD_NOTHING || totalLoad == Constants.WORKLOAD_FULLDAY;
+		return totalLoad > 0 ? StringUtils.join(items, COMA) : null;
 	}
 
 	private String item2string(String item) {

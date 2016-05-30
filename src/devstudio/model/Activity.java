@@ -1,57 +1,24 @@
 package devstudio.model;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
-public enum Activity {
+public class Activity implements Comparable<Activity> {
 
-	ATLANTIS_DEV(Constants.PROJECT_ATLANTIS, Constants.TASK_DEVEL),
-	ATLANTIS_TEST(Constants.PROJECT_ATLANTIS, Constants.TASK_TEST),
-	ATLANTIS_DAILY(Constants.PROJECT_ATLANTIS, Constants.TASK_MISC),
+	public static final Activity DAYOFF = new Activity(Constants.PROJECT_ABSENCE, Constants.TASK_CONGE);
+	public static final Activity PUBLICHOLYDAY = new Activity(Constants.PROJECT_ABSENCE, Constants.TASK_FERIE);
 
-	BACCHUS_DEV(Constants.PROJECT_BACCHUS, Constants.TASK_DEVEL),
-	BACCHUS_TEST(Constants.PROJECT_BACCHUS, Constants.TASK_TEST),
-	BACCHUS_DAILY(Constants.PROJECT_BACCHUS, Constants.TASK_MISC),
+	public static final Activity WEEKLY_MEETING = new Activity(Constants.PROJECT_MISC, Constants.TASK_OTHER);
+	public static final Activity OTHER = new Activity(Constants.PROJECT_MISC, Constants.TASK_OTHER);
+	public static final Activity SUPPORT_LEGACY = new Activity(Constants.PROJECT_LEGACY, Constants.TASK_OTHER);
 
-	BAUCIS_DEV(Constants.PROJECT_BAUCIS, Constants.TASK_DEVEL),
-	BAUCIS_TEST(Constants.PROJECT_BAUCIS, Constants.TASK_TEST),
-	BAUCIS_DAILY(Constants.PROJECT_BAUCIS, Constants.TASK_MISC),
+	public static Activity of(String project, String task) {
+		return new Activity(project, task);
+	}
 
-	BRONTES_DEV(Constants.PROJECT_BRONTES, Constants.TASK_DEVEL),
-	BRONTES_TEST(Constants.PROJECT_BRONTES, Constants.TASK_TEST),
-	BRONTES_DAILY(Constants.PROJECT_BRONTES, Constants.TASK_MISC),
+	private final String project;
+	private final String task;
 
-	CALYPSO_DEV(Constants.PROJECT_CALYPSO, Constants.TASK_DEVEL),
-	CALYPSO_TEST(Constants.PROJECT_CALYPSO, Constants.TASK_TEST),
-	CALYPSO_DAILY(Constants.PROJECT_CALYPSO, Constants.TASK_MISC),
-
-	CASSANDRA_DEV(Constants.PROJECT_CASSANDRA, Constants.TASK_DEVEL),
-	CASSANDRA_TEST(Constants.PROJECT_CASSANDRA, Constants.TASK_TEST),
-	CASSANDRA_DAILY(Constants.PROJECT_CASSANDRA, Constants.TASK_MISC),
-
-	CONCERTO_DEV(Constants.PROJECT_CONCERTO, Constants.TASK_DEVEL),
-	CONCERTO_TEST(Constants.PROJECT_CONCERTO, Constants.TASK_TEST),
-	CONCERTO_DAILY(Constants.PROJECT_CONCERTO, Constants.TASK_MISC),
-
-	CORNAMUSE_DEV(Constants.PROJECT_CORNAMUSE, Constants.TASK_DEVEL),
-	CORNAMUSE_TEST(Constants.PROJECT_CORNAMUSE, Constants.TASK_TEST),
-	CORNAMUSE_DAILY(Constants.PROJECT_CORNAMUSE, Constants.TASK_MISC),
-
-	DEBUSSY_DEV(Constants.PROJECT_DEBUSSY, Constants.TASK_DEVEL),
-	DEBUSSY_TEST(Constants.PROJECT_DEBUSSY, Constants.TASK_TEST),
-	DEBUSSY_DAILY(Constants.PROJECT_DEBUSSY, Constants.TASK_MISC),
-
-	SUPPORT_LEGACY(Constants.PROJECT_LEGACY, Constants.TASK_OTHER),
-	OTHER(Constants.PROJECT_MISC, Constants.TASK_OTHER),
-
-	DAYOFF(Constants.PROJECT_ABSENCE, Constants.TASK_CONGE),
-	PUBLICHOLYDAY(Constants.PROJECT_ABSENCE, Constants.TASK_FERIE);
-
-	private String project;
-	private String task;
-
-	Activity(String projectId, String taskId) {
-		assert StringUtils.isNotBlank(projectId);
-		assert StringUtils.isNotBlank(taskId);
+	private Activity(String projectId, String taskId) {
 		this.project = projectId;
 		this.task = taskId;
 	}
@@ -64,32 +31,52 @@ public enum Activity {
 		return task;
 	}
 
-	public void setTask(String task) {
-		this.task = task;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((project == null) ? 0 : project.hashCode());
+		result = prime * result + ((task == null) ? 0 : task.hashCode());
+		return result;
 	}
 
-	public void setProject(String project) {
-		this.project = project;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Activity other = (Activity) obj;
+		if (project == null) {
+			if (other.project != null)
+				return false;
+		} else if (!project.equals(other.project))
+			return false;
+		if (task == null) {
+			if (other.task != null)
+				return false;
+		} else if (!task.equals(other.task))
+			return false;
+		return true;
 	}
 
-	private static Activity retrieve(String projectName, String task) {
-		for (Activity activity : values()) {
-			if (StringUtils.equals(activity.project, projectName) && StringUtils.equals(activity.task, task)) {
-				return activity;
-			}
+	@Override
+	public int compareTo(Activity o) {
+		int out = project.compareTo(o.project);
+		if (out == 0) {
+			out = task.compareTo(o.task);
 		}
-		throw new IllegalStateException("Cannot find activity: " + projectName + " / " + task);
+		return out;
 	}
 
-	public static Activity getDevel(String projectName) {
-		return retrieve(projectName, Constants.TASK_DEVEL);
+	public Pair<Activity, Double> during(Double workload) {
+		return Pair.of(this, workload);
 	}
 
-	public static Activity getDaily(String projectName) {
-		return retrieve(projectName, Constants.TASK_MISC);
+	public Pair<Activity, Double> allDay() {
+		return Pair.of(this, Constants.WORKLOAD_GREEDY);
 	}
 
-	public static Activity getTest(String projectName) {
-		return retrieve(projectName, Constants.TASK_TEST);
-	}
 }

@@ -17,53 +17,51 @@ public class Seb {
 		return this;
 	}
 
-	public Activity getActivityTest() {
-		return Activity.getTest(projectName);
+	public Activity createActivity(String task) {
+		return Activity.of(projectName, task);
 	}
 
-	public Activity getActivityDaily() {
-		return Activity.getDaily(projectName);
+	public Activity testing() {
+		return createActivity(Constants.TASK_TEST);
 	}
 
-	public Activity getActivityDevel() {
-		return Activity.getDevel(projectName);
+	public Activity dailyMeeting() {
+		return createActivity(Constants.TASK_TEAMMEETING);
 	}
 
-	public Day test() {
-		return daily(new Day(getActivityTest()));
+	public Activity devel() {
+		return createActivity(Constants.TASK_DEVEL);
 	}
 
-	public Day dev() {
-		return daily(new Day(getActivityDevel()));
-	}
-
-	public Day daily(Day in) {
-		return in.addSubActivity(getActivityDaily(), Constants.DAILY_MEETING);
-	}
-
-	public Day noDaily(Day in) {
-		return in.removeSubActivity(getActivityDaily(), Constants.DAILY_MEETING);
-	}
-
-	public Day halfDayOff(Day in) {
-		return in.addSubActivity(Activity.DAYOFF, Constants.HALF_DAY);
-	}
-
-	public Day dayOff() {
-		Day out = new Day(Activity.DAYOFF);
+	public Day newDay(Activity mainActivity, boolean dailyMeeting, boolean halfDayOff) {
+		Day out = new Day();
+		out.add(mainActivity.allDay());
+		if (dailyMeeting) {
+			out.add(dailyMeeting().during(Constants.WORKLOAD_30min));
+		}
+		if (halfDayOff) {
+			out.add(Activity.DAYOFF.during(Constants.WORKLOAD_HALFDAY));
+		}
 		return out;
+	}
+
+	public Day workDayWithWeeklyMeeting() {
+		return newDay(devel(), true, false).add(Activity.WEEKLY_MEETING.during(Constants.WORKLOAD_1h));
+	}
+
+	public Day workDay() {
+		return newDay(devel(), true, false);
+	}
+
+	public Day testDay() {
+		return newDay(testing(), true, false);
 	}
 
 	public Day publicHoliday() {
-		Day out = new Day(Activity.PUBLICHOLYDAY);
-		return out;
+		return newDay(devel(), false, false);
 	}
 
-	public Day meeting1h(Day in) {
-		return meeting(in, Constants.ONE_HOUR);
-	}
-
-	public Day meeting(Day in, Double duration) {
-		return in.addSubActivity(Activity.OTHER, duration);
+	public Day dayOff() {
+		return newDay(devel(), false, false);
 	}
 }

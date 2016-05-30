@@ -1,35 +1,33 @@
 package devstudio.model;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 public class Day {
 
 	public final static Day WEEKEND = new Day();
 
-	/**
-	 * Attributes
-	 */
-	private Activity greedyActivity = null;
-	private final Map<Activity, Double> activities = new TreeMap<>();
+	private final Map<Activity, Double> activities = new HashMap<>();
 
 	public Day() {
 	}
 
-	public Day(Activity activity) {
-		setGreedyActivity(activity);
-	}
-
-	public Day addSubActivity(Activity activity, Double workLoad) {
-		assert workLoad != Constants.GREEDY;
-		assert workLoad >= Constants.NOTHING;
-		Double load = activities.get(activity);
-		if (load == null) {
-			activities.put(activity, workLoad);
-		} else {
-			assert load + workLoad <= Constants.FULL_DAY;
-			activities.put(activity, load + workLoad);
+	public Day add(Pair<Activity, Double> p) {
+		if (p.getValue() == Constants.WORKLOAD_GREEDY) {
+			activities.entrySet().removeIf(e -> e.getValue() == Constants.WORKLOAD_GREEDY);
+			activities.put(p.getKey(), p.getValue());
+		} else if (p.getValue() > Constants.WORKLOAD_NOTHING) {
+			if (activities.containsKey(p.getKey())) {
+				if (activities.get(p.getKey()) != Constants.WORKLOAD_GREEDY) {
+					activities.put(p.getKey(), activities.get(p.getKey()) + p.getValue());
+				}
+			} else {
+				activities.put(p.getKey(), p.getValue());
+			}
 		}
 		getFixedLoad();
 		return this;
@@ -40,40 +38,39 @@ public class Day {
 		return this;
 	}
 
-	public Day removeSubActivity(Activity activity, Double workLoad) {
+	public Day removeSubActivity(Pair<Activity, Double> activity) {
 		Double load = activities.get(activity);
-		if (load != null) {
-			if (workLoad >= load) {
-				activities.remove(activity);
+		if (load != null && load != Constants.WORKLOAD_GREEDY) {
+			if (activity.getValue() >= load) {
+				activities.remove(activity.getKey());
 			} else {
-				assert load - workLoad >= 0;
-				activities.put(activity, load - workLoad);
+				activities.put(activity.getKey(), load - activity.getValue());
 			}
 		}
 		return this;
 	}
 
 	public Double getFixedLoad() {
-		Double out = Constants.NOTHING;
-		for (Entry<Activity, Double> e : activities.entrySet()) {
-			out += e.getValue();
-		}
-		assert out <= Constants.FULL_DAY;
+		double out = activities.entrySet().stream().filter(a -> a.getValue() != Constants.WORKLOAD_GREEDY)
+				.collect(Collectors.summarizingDouble(Map.Entry::getValue)).getSum();
+		assert out >= Constants.WORKLOAD_NOTHING;
+		assert out <= Constants.WORKLOAD_FULLDAY;
 		return out;
 	}
 
 	public Double getWork(Activity activity) {
-		Double out = Constants.NOTHING;
-		if (activity == greedyActivity) {
-			out = Constants.FULL_DAY - getFixedLoad();
-		} else if (activities.containsKey(activity)) {
-			out = activities.get(activity);
+		Double out = activities.get(activity);
+		if (out == null) {
+			out = Constants.WORKLOAD_NOTHING;
+		} else if (out == Constants.WORKLOAD_GREEDY) {
+			out = Constants.WORKLOAD_FULLDAY - getFixedLoad();
 		}
+		assert out >= 0;
+		assert out <= Constants.WORKLOAD_FULLDAY;
 		return out;
 	}
 
-	public Day setGreedyActivity(Activity greedyActivity) {
-		this.greedyActivity = greedyActivity;
-		return this;
+	public Set<Activity> getActivities() {
+		return activities.keySet();
 	}
 }

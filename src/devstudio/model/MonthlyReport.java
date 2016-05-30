@@ -25,7 +25,7 @@ public class MonthlyReport {
 		this.dayCount = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 	}
 
-	public Day newDay(Day day) {
+	public void add(Day day) {
 		switch ((days.size() % 7) + firstDayOfMonth) {
 		case Calendar.SUNDAY:
 			days.add(Day.WEEKEND);
@@ -38,7 +38,6 @@ public class MonthlyReport {
 			break;
 		}
 		days.add(lastDay = day);
-		return lastDay;
 	}
 
 	public List<Day> getFirstReport() {
