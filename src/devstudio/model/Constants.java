@@ -14,6 +14,7 @@ public interface Constants {
 	String PROJECT_CONCERTO = "AP15024";
 	String PROJECT_CORNAMUSE = "AP15032";
 	String PROJECT_DEBUSSY = "AP16015";
+	String PROJECT_DIAPASON = "AP16020";
 
 	/**
 	 * Other projects

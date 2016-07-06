@@ -13,32 +13,32 @@ public class Seb201605 {
 		MonthlyReport report = new MonthlyReport(2016, Calendar.MAY);
 		Seb seb = new Seb(Constants.PROJECT_DEBUSSY);
 
-		report.add(seb.workDay());
-		report.add(seb.workDay());
-		report.add(seb.workDayWithWeeklyMeeting());
-		report.add(seb.workDay());
-		report.add(seb.workDay());
+		report.add(seb.dayWork());
+		report.add(seb.dayWork());
+		report.add(seb.dayWorkWithWeeklyMeeting());
+		report.add(seb.dayWork());
+		report.add(seb.dayWork());
 
-		report.add(seb.workDay());
-		report.add(seb.workDay());
-		report.add(seb.workDayWithWeeklyMeeting());
-		report.add(seb.workDay());
-		report.add(seb.workDay());
+		report.add(seb.dayWork());
+		report.add(seb.dayWork());
+		report.add(seb.dayWorkWithWeeklyMeeting());
+		report.add(seb.dayWork());
+		report.add(seb.dayWork());
 
-		report.add(seb.workDay());
-		report.add(seb.workDay());
-		report.add(seb.workDayWithWeeklyMeeting());
-		report.add(seb.workDay());
-		report.add(seb.workDay());
+		report.add(seb.dayWork());
+		report.add(seb.dayWork());
+		report.add(seb.dayWorkWithWeeklyMeeting());
+		report.add(seb.dayWork());
+		report.add(seb.dayWork());
 
-		report.add(seb.workDay());
-		report.add(seb.workDay());
-		report.add(seb.newDay(seb.createActivity(Constants.TASK_TRAVEL), false, false)
-				.add(seb.createActivity(Constants.TASK_SUPPORT).during(Constants.WORKLOAD_4h)));
-		report.add(seb.workDay().add(seb.createActivity(Constants.TASK_TRAVEL).during(Constants.WORKLOAD_4h + Constants.WORKLOAD_2h)));
-		report.add(seb.workDay());
+		report.add(seb.dayWork());
+		report.add(seb.dayWork());
+		report.add(seb.dayCreate(seb.activityCreate(Constants.TASK_TRAVEL), false, false)
+				.add(seb.activityCreate(Constants.TASK_SUPPORT).during(Constants.WORKLOAD_4h)));
+		report.add(seb.dayWork().add(seb.activityCreate(Constants.TASK_TRAVEL).during(Constants.WORKLOAD_4h + Constants.WORKLOAD_2h)));
+		report.add(seb.dayWork());
 
-		report.add(seb.workDay());
+		report.add(seb.dayWork());
 
 		Csv.writeReport(report);
 	}

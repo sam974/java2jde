@@ -14,33 +14,33 @@ public class SampleReport {
 		MonthlyReport report = new MonthlyReport(2014, Calendar.JANUARY);
 		Seb seb = new Seb(Constants.PROJECT_ATLANTIS);
 
-		report.add(seb.publicHoliday());
+		report.add(seb.dayPublicHoliday());
 		report.add(seb.dayOff());
 		report.add(seb.dayOff());
 
-		report.add(seb.workDay());
-		report.add(seb.workDay());
-		report.add(seb.workDay());
-		report.add(seb.workDay());
-		report.add(seb.workDay());
+		report.add(seb.dayWork());
+		report.add(seb.dayWork());
+		report.add(seb.dayWork());
+		report.add(seb.dayWork());
+		report.add(seb.dayWork());
 
-		report.add(seb.workDay());
-		report.add(seb.workDay());
-		report.add(seb.workDayWithWeeklyMeeting());
-		report.add(seb.workDay());
-		report.add(seb.workDay());
+		report.add(seb.dayWork());
+		report.add(seb.dayWork());
+		report.add(seb.dayWorkWithWeeklyMeeting());
+		report.add(seb.dayWork());
+		report.add(seb.dayWork());
 
-		report.add(seb.workDay());
-		report.add(seb.testDay());
-		report.add(seb.newDay(seb.testing(), false, true)); // testing, 1/2 journée, daily
-		report.add(seb.newDay(seb.testing(), true, true)); // testing, 1/2 journée, no daily
-		report.add(seb.setProjectName(Constants.PROJECT_BACCHUS).workDay()); // change project
+		report.add(seb.dayWork());
+		report.add(seb.dayTest());
+		report.add(seb.dayCreate(seb.activityTesting(), false, true)); // testing, 1/2 journée, daily
+		report.add(seb.dayCreate(seb.activityTesting(), true, true)); // testing, 1/2 journée, no daily
+		report.add(seb.setProjectName(Constants.PROJECT_BACCHUS).dayWork()); // change project
 
-		report.add(seb.workDay().add(Activity.SUPPORT_LEGACY.during(Constants.WORKLOAD_1h)));
-		report.add(seb.workDay().add(Activity.OTHER.during(Constants.WORKLOAD_2h)));
-		report.add(seb.workDay());
-		report.add(seb.workDay());
-		report.add(seb.workDay());
+		report.add(seb.dayWork().add(Activity.SUPPORT_LEGACY.during(Constants.WORKLOAD_1h)));
+		report.add(seb.dayWork().add(Activity.OTHER.during(Constants.WORKLOAD_2h)));
+		report.add(seb.dayWork());
+		report.add(seb.dayWork());
+		report.add(seb.dayWork());
 
 		Csv.writeReport(report);
 	}
