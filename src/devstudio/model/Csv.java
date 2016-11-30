@@ -59,7 +59,7 @@ public class Csv extends PrintWriter {
 
 	private String getActivityLine(Activity activity, List<Day> days) {
 		List<String> items = new ArrayList<>();
-		items.add(item2string("0"));
+		// items.add(item2string("0"));
 		items.add(item2string(activity.getProject()));
 		items.add(item2string(activity.getTask()));
 		double totalLoad = 0;
