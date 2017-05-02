@@ -16,10 +16,12 @@ public interface Constants {
 	String PROJECT_DEBUSSY = "AP16015";
 	String PROJECT_DIAPASON = "AP16020";
 	String PROJECT_DISCO = "AP16034";
+	String PROJECT_ELECTRO = "AP17012";
 
 	/**
 	 * Other projects
 	 */
+	String PROJECT_LEGATO = "AP17004";
 	String PROJECT_LEGACY = "AP10027";
 	String PROJECT_MISC = "AP10018";
 	String PROJECT_FORMATION = "AP10049";
@@ -28,6 +30,7 @@ public interface Constants {
 	/**
 	 * Tasks
 	 */
+	String TASK_LEGATO_JAVA = "AF";
 	String TASK_DEVEL = "SW";
 	String TASK_TEST = "SVT";
 	String TASK_TEAMMEETING = "PM";

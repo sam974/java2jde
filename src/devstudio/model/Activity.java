@@ -11,6 +11,8 @@ public class Activity implements Comparable<Activity> {
 	public static final Activity OTHER = new Activity(Constants.PROJECT_MISC, Constants.TASK_OTHER);
 	public static final Activity SUPPORT_LEGACY = new Activity(Constants.PROJECT_LEGACY, Constants.TASK_OTHER);
 
+	public static final Activity LEGATO_JAVA = new Activity(Constants.PROJECT_LEGATO, Constants.TASK_LEGATO_JAVA);
+
 	public static Activity of(String project, String task) {
 		return new Activity(project, task);
 	}
