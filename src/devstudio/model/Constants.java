@@ -17,11 +17,13 @@ public interface Constants {
 	String PROJECT_DIAPASON = "AP16020";
 	String PROJECT_DISCO = "AP16034";
 	String PROJECT_ELECTRO = "AP17012";
+	String PROJECT_ELLINGTON = "AP17016";
 
 	/**
 	 * Other projects
 	 */
 	String PROJECT_LEGATO = "AP17004";
+	String PROJECT_LEGATO_RTOS = "AP17015";
 	String PROJECT_LEGACY = "AP10027";
 	String PROJECT_MISC = "AP10018";
 	String PROJECT_FORMATION = "AP10049";

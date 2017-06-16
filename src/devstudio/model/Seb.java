@@ -53,6 +53,10 @@ public class Seb {
 		return dayCreate(activityDevel(), true, false);
 	}
 
+	public Day dayWorkLegato() {
+		return dayCreate(Activity.LEGATO_JAVA, true, false);
+	}
+
 	public Day dayTest() {
 		return dayCreate(activityTesting(), true, false);
 	}
